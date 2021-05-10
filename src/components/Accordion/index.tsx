@@ -3,7 +3,7 @@ import "./index.css";
 
 const Accordion: React.FC<{
   title: string;
-  key: number;
+  key: string;
   isOpen: boolean;
   isSelected: boolean;
 }> = ({ title }) => {
