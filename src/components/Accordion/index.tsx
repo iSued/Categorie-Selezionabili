@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const Accordion: React.FC<{ title: string; key: number }> = ({ title }) => {
+const Accordion: React.FC<{
+  title: string;
+  key: number;
+  isOpen: boolean;
+  isSelected: boolean;
+}> = ({ title }) => {
   const [isActive, setIsActive] = useState("none");
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedColor, setIsCheckedColor] = useState("white");

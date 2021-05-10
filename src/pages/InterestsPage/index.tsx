@@ -7,14 +7,14 @@ const InterestsPage = () => {
   const [isError, setIsError] = useState(true);
   const [selected, setSelected] = useState("Office 365");
 
-  const { data, toggleCategory, error } = useCategorySelector()
+  //const { data, toggleCategory, error } = useCategorySelector()
 
   const [openAccordionId, setOpenAccordionId] = React.useState(null)
 
   const handleSelect = () => {};
 
   const data = { 
-    "cat1" : {
+    cat1 : {
       catId: "cat1",
       title: "Titolo1",
       description: "Descrizione 1",
@@ -24,7 +24,7 @@ const InterestsPage = () => {
       completed: true,
       assigned: true
     },
-    "cat2" : {
+    cat2 : {
       catId: "cat2",
       title: "Titolo2",
       description: "Descrizione 2",
@@ -34,7 +34,7 @@ const InterestsPage = () => {
       completed: true,
       assigned: true
     },
-    "cat3" : {
+    cat3 : {
       catId: "cat3",
       title: "Titolo3",
       description: "Descrizione 3",
@@ -44,7 +44,7 @@ const InterestsPage = () => {
       completed: true,
       assigned: true
     },
-    "cat4" : {
+    cat4 : {
       catId: "cat4",
       title: "Titolo4",
       description: "Descrizione 4",
@@ -55,7 +55,7 @@ const InterestsPage = () => {
       assigned: true
     }
   }
-  
+ const learningCategories = Object.keys(data)
 
   const toggleCategory:(catId:string) => void = (catId:string) => {
     
@@ -95,8 +95,8 @@ const InterestsPage = () => {
         </div>
 
         <div className="list">
-          {Object.keys(data).map((data_key, index) => {
-            return <Accordion isOpen={ data_key === openAccordionId } isSelected={ data[data_key].selected]}  title={data[data_key]..title} key={index} />;
+          {learningCategories.map((data_key, index) => {
+            return <Accordion isOpen={ data_key === openAccordionId?true:false } isSelected={ data[data_key].selected]}  title={data.[data_key].title}  />;
           })}
         </div>
         <div className="button">
