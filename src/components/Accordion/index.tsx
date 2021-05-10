@@ -2,27 +2,110 @@ import React, { useState } from "react";
 import "./index.css";
 
 const Accordion: React.FC<{
-  title: string;
   key: string;
   isOpen: boolean;
-  isSelected: boolean;
-}> = ({ title, key, isOpen, isSelected }) => {
-  const [isActive, setIsActive] = useState("none");
+  title: string;
+  description: string;
+  selected: boolean;
+  mandatory: boolean;
+  selectable: boolean;
+  completed: boolean;
+  assigned: boolean;
+}> = ({
+  key,
+  isOpen,
+  title,
+  description,
+  selected,
+  mandatory,
+  selectable,
+  completed,
+  assigned,
+}) => {
+  const [isActiveStyle, setIsActiveStyle] = useState("none");
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedColor, setIsCheckedColor] = useState("white");
 
+  const handleConditionalRendering = () => {
+    if (selectable) {
+      return (
+        <div className="accordionTitle">
+          <div className="customRadio" onClick={handleRadio}>
+            <div
+              className="checkedRadio"
+              style={{ backgroundColor: isCheckedColor }}
+            ></div>
+          </div>
+          <span>{title}</span>
+        </div>
+      );
+    } else if (selected) {
+      setIsCheckedColor("blue");
+      return (
+        <div className="accordionTitle">
+          <div className="customRadio" onClick={handleRadio}>
+            <div
+              className="checkedRadio"
+              style={{ backgroundColor: isCheckedColor }}
+            ></div>
+          </div>
+          <span>{title}</span>
+        </div>
+      );
+    } else if (mandatory) {
+      return (
+        <div className="accordionTitle">
+          <div className="customRadio" onClick={handleRadio}>
+            <div
+              className="checkedRadio"
+              style={{ backgroundColor: "blue" }}
+            ></div>
+          </div>
+          <span>{title}</span>
+          <span>mandatory</span>
+        </div>
+      );
+    } else if (completed) {
+      return (
+        <div className="accordionTitle">
+          <div className="customRadio" onClick={handleRadio}>
+            <div
+              className="checkedRadio"
+              style={{ backgroundColor: isCheckedColor }}
+            ></div>
+          </div>
+          <span>{title}</span>
+          <span>completed</span>
+        </div>
+      );
+    } else if (assigned) {
+      return (
+        <div className="accordionTitle">
+          <div className="customRadio" onClick={handleRadio}>
+            <div
+              className="checkedRadio"
+              style={{ backgroundColor: isCheckedColor }}
+            ></div>
+          </div>
+          <span>{title}</span>
+          <span>assigned</span>
+        </div>
+      );
+    }
+  };
+
   const handleAccordion = () => {
-    if (isActive === "none") {
-      setIsActive("block");
+    if (isActiveStyle === "none") {
+      setIsActiveStyle("block");
     } else {
-      setIsActive("none");
+      setIsActiveStyle("none");
     }
   };
 
   const handleRadio = () => {
     if (isCheckedColor === "white") {
       setIsCheckedColor("blue");
-      setIsActive("none");
+      setIsActiveStyle("none");
     } else {
       setIsCheckedColor("white");
     }
@@ -32,24 +115,11 @@ const Accordion: React.FC<{
     <>
       <div className="accordion">
         <div className="accordionHeader">
-          <div className="accordionTitle">
-            <div className="customRadio" onClick={handleRadio}>
-              <div
-                className="checkedRadio"
-                style={{ backgroundColor: isCheckedColor }}
-              ></div>
-            </div>
-            <span>{title}</span>
-          </div>
+          {handleConditionalRendering()}
           <span onClick={handleAccordion}>&#x2193;</span>
         </div>
-        <div className="panel" style={{ display: isActive }}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque
-            necessitatibus officia sunt. Cumque dolorum at dolor est dolorem
-            laboriosam, quae fuga nisi temporibus nemo neque quo aliquam!
-            Assumenda, mollitia voluptatibus.
-          </p>
+        <div className="panel" style={{ display: isActiveStyle }}>
+          <p>{description}</p>
         </div>
       </div>
     </>

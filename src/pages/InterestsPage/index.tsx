@@ -5,17 +5,14 @@ import { title } from "process";
 
 const InterestsPage = () => {
   const [isError, setIsError] = useState(true);
-  const [selected, setSelected] = useState("Office 365");
 
-  //const { data, toggleCategory, error } = useCategorySelector()
+  //const { data, toggleCategory, error } = useCategorySelector() ++THE CUSTOM HOOK I'LL USE++
 
   const [openAccordionId, setOpenAccordionId] = React.useState(null);
 
   useEffect(() => {
     console.log(learningCategories);
   });
-
-  const handleSelect = () => {};
 
   const data = new Map(
     Object.entries({
@@ -24,7 +21,7 @@ const InterestsPage = () => {
         title: "Titolo1",
         description: "Descrizione 1",
         selected: true,
-        mandatory: true,
+        mandatory: false,
         selectable: true,
         completed: true,
         assigned: true,
@@ -34,7 +31,7 @@ const InterestsPage = () => {
         title: "Titolo2",
         description: "Descrizione 2",
         selected: true,
-        mandatory: true,
+        mandatory: false,
         selectable: true,
         completed: true,
         assigned: true,
@@ -44,7 +41,7 @@ const InterestsPage = () => {
         title: "Titolo3",
         description: "Descrizione 3",
         selected: true,
-        mandatory: true,
+        mandatory: false,
         selectable: true,
         completed: true,
         assigned: true,
@@ -54,10 +51,10 @@ const InterestsPage = () => {
         title: "Titolo4",
         description: "Descrizione 4",
         selected: false,
-        mandatory: true,
-        selectable: true,
+        mandatory: false,
+        selectable: false,
         completed: true,
-        assigned: true,
+        assigned: false,
       },
     })
   );
@@ -66,25 +63,9 @@ const InterestsPage = () => {
 
   const categoriesIterator = data.keys();
   const learningCategories: string[] = [];
-  data.forEach((category) => {
+  data.forEach(() => {
     learningCategories.push(categoriesIterator.next().value);
   });
-
-  /*
-
-const selectedKey = 2;
-const data = [
-  { title: "Office 365" },
-  { title: "digital for leader" },
-  { title: "digital learning" },
-  { title: "Tecnologie digitali" },
-  { title: "Scenario e consapevolezza digitale" },
-  { title: "MongoDB" },
-  { title: "GraphQL" },
-  { title: "Redux" },
-];
-
-*/
 
   return (
     <>
@@ -104,14 +85,18 @@ const data = [
         </div>
 
         <div className="list">
-          {" "}
           {learningCategories.map((data_key: string, index) => {
             return (
               <Accordion
                 key={data_key}
                 isOpen={data_key === openAccordionId ? true : false}
-                isSelected={data.get(data_key)!.selected}
                 title={data.get(data_key)!.title}
+                description={data.get(data_key)!.description}
+                selected={data.get(data_key)!.selected}
+                mandatory={data.get(data_key)!.mandatory}
+                selectable={data.get(data_key)!.selectable}
+                completed={data.get(data_key)!.completed}
+                assigned={data.get(data_key)!.assigned}
               />
             );
           })}
