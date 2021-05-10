@@ -7,7 +7,62 @@ const InterestsPage = () => {
   const [isError, setIsError] = useState(true);
   const [selected, setSelected] = useState("Office 365");
 
+  const { data, toggleCategory, error } = useCategorySelector()
+
+  const [openAccordionId, setOpenAccordionId] = React.useState(null)
+
   const handleSelect = () => {};
+
+  const data = { 
+    "cat1" : {
+      catId: "cat1",
+      title: "Titolo1",
+      description: "Descrizione 1",
+      selected: true,
+      mandatory: true,
+      selectable: true,
+      completed: true,
+      assigned: true
+    },
+    "cat2" : {
+      catId: "cat2",
+      title: "Titolo2",
+      description: "Descrizione 2",
+      selected: true,
+      mandatory: true,
+      selectable: true,
+      completed: true,
+      assigned: true
+    },
+    "cat3" : {
+      catId: "cat3",
+      title: "Titolo3",
+      description: "Descrizione 3",
+      selected: true,
+      mandatory: true,
+      selectable: true,
+      completed: true,
+      assigned: true
+    },
+    "cat4" : {
+      catId: "cat4",
+      title: "Titolo4",
+      description: "Descrizione 4",
+      selected: false,
+      mandatory: true,
+      selectable: true,
+      completed: true,
+      assigned: true
+    }
+  }
+  
+
+  const toggleCategory:(catId:string) => void = (catId:string) => {
+    
+  }
+
+  /*
+
   const selectedKey = 2;
   const data = [
     { title: "Office 365" },
@@ -20,12 +75,13 @@ const InterestsPage = () => {
     { title: "Redux" },
   ];
 
+  */
+
   return (
     <>
       <div className="mainContainer">
         {isError ? (
           <div className="errorContainer">
-            <p>{data[selectedKey].title}</p>
             <p>
               Seleziona massimo <strong>4 aree</strong> di interesse
             </p>
@@ -39,10 +95,8 @@ const InterestsPage = () => {
         </div>
 
         <div className="list">
-          {data.map((item, index) => {
-            let selected;
-
-            return <Accordion title={item.title} key={index} />;
+          {Object.keys(data).map((data_key, index) => {
+            return <Accordion isOpen={ data_key === openAccordionId } isSelected={ data[data_key].selected]}  title={data[data_key]..title} key={index} />;
           })}
         </div>
         <div className="button">
