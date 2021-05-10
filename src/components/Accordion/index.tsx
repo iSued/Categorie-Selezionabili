@@ -6,7 +6,7 @@ const Accordion: React.FC<{
   key: string;
   isOpen: boolean;
   isSelected: boolean;
-}> = ({ title }) => {
+}> = ({ title, key, isOpen, isSelected }) => {
   const [isActive, setIsActive] = useState("none");
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedColor, setIsCheckedColor] = useState("white");
