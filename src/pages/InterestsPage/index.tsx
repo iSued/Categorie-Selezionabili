@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import Accordion from "../../components/Accordion/index";
-import { title } from "process";
 
-const InterestsPage = () => {
 
-  //const { data, toggleCategory, error } = useCategorySelector() ++THE CUSTOM HOOK I'LL USE++
+const useCategoryHook = () => {
 
-  const [isError, setIsError] = useState(true);
-  const [openAccordionId, setOpenAccordionId] = React.useState(null);
-
-  const data = new Map(
-    Object.entries({
+  const [data, setData] = useState({
       cat1: {
         catId: "cat1",
         title: "Titolo1",
@@ -52,12 +46,31 @@ const InterestsPage = () => {
         completed: true,
         assigned: false,
       },
-    })
-  );
+  })
 
-  const toggleCategory: (catId: string) => void = (catId: string) => { };
+  const toggleCategory = (catId:any) => {
+    var newData:any = { ...data }
+    newData[catId].selected = !newData[catId].selected
+    setData({ ...newData})
+  }
 
-  console.log("Ciao")
+  return { data: new Map(Object.entries(data)), toggleCategory }
+
+}
+
+
+
+const InterestsPage = () => {
+
+  const { data, toggleCategory } = useCategoryHook()
+
+  // data
+  // error
+  // toggleCategory(idCategoria) => void
+
+  const [isError, setIsError] = useState(true);
+  const [openAccordionId, setOpenAccordionId] = React.useState(null);
+
 
   return (
     <>
@@ -79,9 +92,10 @@ const InterestsPage = () => {
         <div className="list">
           {
             [...data].map((element) => {
+
         
               return <Accordion
-                key={element[0]}
+                id={element[0]}
                 isOpen={element[0] === openAccordionId ? true : false}
                 title={element[1].title}
                 description={element[1].description}
@@ -90,6 +104,7 @@ const InterestsPage = () => {
                 selectable={element[1].selectable}
                 completed={element[1].completed}
                 assigned={element[1].assigned}
+                onSelect={ toggleCategory }
               />
             })
           }
@@ -101,4 +116,5 @@ const InterestsPage = () => {
     </>
   );
 };
+
 export default InterestsPage;
