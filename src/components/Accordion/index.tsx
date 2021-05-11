@@ -10,7 +10,6 @@ const Accordion: React.FC<{
   mandatory: boolean;
   selectable: boolean;
   completed: boolean;
-  active:boolean;
   assigned: boolean;
   onSelect: any;
   onOpen: any;
@@ -24,7 +23,6 @@ const Accordion: React.FC<{
   selectable,
   completed,
   assigned,
-  active,
   onSelect,
   onOpen
 }) => {
@@ -37,7 +35,7 @@ const Accordion: React.FC<{
               <CustomRadio onSelect={()=> { onSelect(id) }} isSelected={selected} />
               <span>{title}</span>
             </div>
-            <span>&#x2193;</span>
+            <span onClick={()=> { onOpen(id)}}>&#x2193;</span>
           </div>
           <div className="panel"  style={{ display: isOpen // Questo me lo gestisci tu }}>
             <p>{description}</p>
