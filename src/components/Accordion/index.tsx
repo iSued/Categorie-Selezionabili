@@ -35,9 +35,9 @@ const Accordion: React.FC<{
               <CustomRadio onSelect={()=> { onSelect(id) }} isSelected={selected} />
               <span>{title}</span>
             </div>
-            <span onClick={()=> { onOpen(id)}}>&#x2193;</span>
+            <span style={{ rotate: isOpen ? "rotateZ(0)" : "rotateZ(180)"}} onClick={()=> { onOpen(id)}}>&#x2193;</span>
           </div>
-          <div className="panel"  style={{ display: isOpen // Questo me lo gestisci tu }}>
+          <div className="panel"  style={{ display: isOpen ? "block" : "none"}}>
             <p>{description}</p>
           </div>
         </div>
