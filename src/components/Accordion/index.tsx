@@ -10,8 +10,10 @@ const Accordion: React.FC<{
   mandatory: boolean;
   selectable: boolean;
   completed: boolean;
+  active:boolean;
   assigned: boolean;
   onSelect: any;
+  onOpen: any;
 }> = ({
   id,
   isOpen,
@@ -22,9 +24,10 @@ const Accordion: React.FC<{
   selectable,
   completed,
   assigned,
-  onSelect
+  active,
+  onSelect,
+  onOpen
 }) => {
-    const [isActiveStyle, setIsActiveStyle] = useState("none");
 
     return (
       <>
@@ -36,7 +39,7 @@ const Accordion: React.FC<{
             </div>
             <span>&#x2193;</span>
           </div>
-          <div className="panel" style={{ display: isActiveStyle }}>
+          <div className="panel"  style={{ display: isOpen // Questo me lo gestisci tu }}>
             <p>{description}</p>
           </div>
         </div>
@@ -53,4 +56,5 @@ const Accordion: React.FC<{
       ></div>
     </div>
   }
+
 export default Accordion;

@@ -69,7 +69,7 @@ const InterestsPage = () => {
   // toggleCategory(idCategoria) => void
 
   const [isError, setIsError] = useState(true);
-  const [openAccordionId, setOpenAccordionId] = React.useState(null);
+  const [openAccordionId, setOpenAccordionId] = React.useState<any>(null);
 
 
   return (
@@ -104,6 +104,13 @@ const InterestsPage = () => {
                 selectable={element[1].selectable}
                 completed={element[1].completed}
                 assigned={element[1].assigned}
+                onOpen={ (id:string) => { 
+                    if(id== openAccordionId){
+                      setOpenAccordionId(null)
+                    }else{
+                      setOpenAccordionId(id)
+                    }
+                }}
                 onSelect={ toggleCategory }
               />
             })
