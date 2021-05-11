@@ -4,15 +4,11 @@ import Accordion from "../../components/Accordion/index";
 import { title } from "process";
 
 const InterestsPage = () => {
-  const [isError, setIsError] = useState(true);
 
   //const { data, toggleCategory, error } = useCategorySelector() ++THE CUSTOM HOOK I'LL USE++
 
+  const [isError, setIsError] = useState(true);
   const [openAccordionId, setOpenAccordionId] = React.useState(null);
-
-  useEffect(() => {
-    console.log(learningCategories);
-  });
 
   const data = new Map(
     Object.entries({
@@ -59,13 +55,9 @@ const InterestsPage = () => {
     })
   );
 
-  const toggleCategory: (catId: string) => void = (catId: string) => {};
+  const toggleCategory: (catId: string) => void = (catId: string) => { };
 
-  const categoriesIterator = data.keys();
-  const learningCategories: string[] = [];
-  data.forEach(() => {
-    learningCategories.push(categoriesIterator.next().value);
-  });
+  console.log("Ciao")
 
   return (
     <>
@@ -85,21 +77,22 @@ const InterestsPage = () => {
         </div>
 
         <div className="list">
-          {learningCategories.map((data_key: string, index) => {
-            return (
-              <Accordion
-                key={data_key}
-                isOpen={data_key === openAccordionId ? true : false}
-                title={data.get(data_key)!.title}
-                description={data.get(data_key)!.description}
-                selected={data.get(data_key)!.selected}
-                mandatory={data.get(data_key)!.mandatory}
-                selectable={data.get(data_key)!.selectable}
-                completed={data.get(data_key)!.completed}
-                assigned={data.get(data_key)!.assigned}
+          {
+            [...data].map((element) => {
+        
+              return <Accordion
+                key={element[0]}
+                isOpen={element[0] === openAccordionId ? true : false}
+                title={element[1].title}
+                description={element[1].description}
+                selected={element[1].selected}
+                mandatory={element[1].mandatory}
+                selectable={element[1].selectable}
+                completed={element[1].completed}
+                assigned={element[1].assigned}
               />
-            );
-          })}
+            })
+          }
         </div>
         <div className="button">
           <button>avanti</button>
