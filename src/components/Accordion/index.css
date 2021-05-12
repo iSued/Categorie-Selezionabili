@@ -9,7 +9,8 @@
   border-radius: 2rem;
   border: none;
   outline: none;
-  transition: max-height 0.3s;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
   height: auto;
   max-height: 600px;
 }
@@ -33,6 +34,7 @@
   margin-right: 1rem;
   border: 2px solid blue;
   border-radius: 200px;
+
   width: 25px;
   height: 25px;
 }
@@ -46,101 +48,19 @@
   margin: auto;
 }
 /* CSS rules for opened Panel  */
-.openedPanel {
-  -webkit-animation: openedPanel 0.5s ease-in both;
-  animation: openedPanel 0.5s ease-in both;
-  transition: 0.2s all ease-in;
+.panel.open {
   max-height: 500px;
-}
-
-@-webkit-keyframes openedPanel {
-  0% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-}
-@keyframes openedPanel {
-  0% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
+  transition: 0.3s all ease-in;
 }
 
 /* CSS rules for closed Panel */
-.toggledPanel {
-  -webkit-animation: toggledPanel 2s cubic-bezier(0.95, 0.05, 0.795, 0.035) both;
-  animation: toggledPanel 2s cubic-bezier(00.25, 0.46, 0.45, 0.94) both;
-  visibility: hidden;
+.panel {
+  max-height: 0;
+  transition: 0.3s all ease-out;
   overflow: hidden;
-  height: 0;
-  width: 0;
-}
-
-@-webkit-keyframes toggledPanel {
-  0% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-}
-@keyframes toggledPanel {
-  0% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
 }
 
 .basicArrow {
 }
 .rotatedArrow {
-}
-
-.panel.open {
-  max-height: 500px;
-  transition: 0.2s all ease-in;
-}
-
-.panel {
-  max-height: 0;
-  transition: 0.2s all ease-in;
-  overflow: hidden;
 }

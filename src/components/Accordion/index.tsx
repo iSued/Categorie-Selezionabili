@@ -45,9 +45,7 @@ const Accordion: React.FC<{
           <span
             className=""
             onClick={() => {
-              panel === "panel"
-                ? setPanel("openedPanel")
-                : setPanel("toggledPanel");
+              panel === "panel" ? setPanel("panel open") : setPanel("panel");
             }}
           >
             &#x2193;
