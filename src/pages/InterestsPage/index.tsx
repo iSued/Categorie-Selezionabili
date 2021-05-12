@@ -67,7 +67,6 @@ const InterestsPage = () => {
 
   return (
     <>
-      <div className="mainContainer">
         {isError ? (
           <div className="errorContainer">
             <p>
@@ -96,7 +95,7 @@ const InterestsPage = () => {
                 completed={element[1].completed}
                 assigned={element[1].assigned}
                 onOpen={(id: string) => {
-                  if ((id = openAccordionId)) {
+                  if ((id == openAccordionId)) {
                     setOpenAccordionId(null);
                   } else {
                     setOpenAccordionId(id);
@@ -110,7 +109,6 @@ const InterestsPage = () => {
         <div className="button">
           <button>avanti</button>
         </div>
-      </div>
     </>
   );
 };

@@ -28,9 +28,6 @@ const Accordion: React.FC<{
   onSelect,
   onOpen,
 }) => {
-  const [panel, setPanel] = useState("panel");
-  const [arrow, setArrow] = useState("basicArrow");
-  const [accordion, setAccordion] = useState("accordion");
   return (
     <>
       <div className="accordion">
@@ -45,18 +42,15 @@ const Accordion: React.FC<{
             <span>{title}</span>
           </div>
           <span
-            className={arrow}
+            className={isOpen ? "basicArrow rotated" : "basicArrow"}
             onClick={() => {
-              panel === "panel" ? setPanel("panel open") : setPanel("panel");
-              arrow === "basicArrow"
-                ? setArrow("rotatedArrow")
-                : setArrow("basicArrow");
+              onOpen(id)
             }}
           >
             <FontAwesomeIcon icon={faChevronUp} />
           </span>
         </div>
-        <div className={panel}>
+        <div className={ isOpen ? "panel open" : "panel"}>
           <p>{description}</p>
         </div>
       </div>

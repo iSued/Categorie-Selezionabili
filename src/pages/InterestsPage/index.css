@@ -1,33 +1,10 @@
-.mainContainer {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px solid blue;
-  position: fixed;
-}
-
 .list {
-  border: 1px solid blue;
-  width: 400px;
-  max-height: 65vh;
-  flex-grow: 1;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  scrollbar-width: none;
+  overflow: hidden;
 }
 
 .headerContainer {
-  border: 1px solid blue;
-  width: 400px;
-  flex-grow: 2;
-  align-items: center;
-  display: flex;
-  flex-direction: column-reverse;
+  text-align: center;
+  padding: 1rem
 }
 
 .button {

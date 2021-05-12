@@ -1,32 +1,15 @@
 .accordion {
+  margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
   background-color: white;
   color: #444;
   padding: 18px;
   width: 90%;
-  box-shadow: 3px 3px 2.8px #888888;
+  box-shadow: 3px 3px 2.8px #cdcdcd;
   border-radius: 2rem;
-  border: none;
-  outline: none;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-  height: auto;
-  max-height: 600px;
 }
 
-.active,
-.accordion:hover {
-  background-color: white;
-}
-.accordionHeader {
-  display: flex;
-  justify-content: space-between;
-}
-.accordionTitle {
-  display: flex;
-  justify-content: space-between;
-}
 .customRadio {
   display: flex;
   justify-content: center;
@@ -34,7 +17,6 @@
   margin-right: 1rem;
   border: 2px solid blue;
   border-radius: 200px;
-
   width: 25px;
   height: 25px;
 }
@@ -65,13 +47,15 @@
   transition-duration: 0.3s;
   font-weight: bold;
 }
-.rotatedArrow {
-  cursor: pointer;
-  transition-duration: 0.3s;
-  font-weight: bold;
+.basicArrow.rotated {
   transform: rotateX(180deg);
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  -o-transform: rotateX(180deg);
-  -ms-transform: rotateX(180deg);
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.accordionTitle {
+  display: flex;
+  justify-content: space-between;
 }
