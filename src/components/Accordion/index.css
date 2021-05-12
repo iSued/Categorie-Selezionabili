@@ -9,7 +9,7 @@
   border-radius: 2rem;
   border: none;
   outline: none;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s;
   height: auto;
   max-height: 500px;
 }
@@ -53,11 +53,10 @@
 
 /* CSS rules for closed Panel */
 .toggledPanel {
-  transition: 0.3s all ease-in;
-
+  transition: 0.3s all ease-out;
   visibility: hidden;
   overflow: hidden;
-  max-height: 0;
+  height: 0;
   width: 0;
 }
 
