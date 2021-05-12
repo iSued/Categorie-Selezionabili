@@ -26,7 +26,7 @@ const Accordion: React.FC<{
   onSelect,
   onOpen,
 }) => {
-  const [panel, setPanel] = useState("toggledPanel");
+  const [panel, setPanel] = useState("panel");
   const [arrow, setArrow] = useState("basicArrow");
   const [accordion, setAccordion] = useState("accordion");
   return (
@@ -45,9 +45,9 @@ const Accordion: React.FC<{
           <span
             className=""
             onClick={() => {
-              panel === "toggledPanel"
-                ? setPanel("openedPanel")
-                : setPanel("toggledPanel");
+              panel === "panel"
+                ? setPanel("panel open")
+                : setPanel("panel");
             }}
           >
             &#x2193;

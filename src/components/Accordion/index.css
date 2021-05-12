@@ -130,3 +130,14 @@
 }
 .rotatedArrow {
 }
+
+.panel.open {
+    max-height: 500px;
+    transition: 0.2s all ease-in;
+}
+
+.panel {
+    max-height: 0;
+    transition: 0.2s all ease-in;
+    overflow: hidden;
+}
