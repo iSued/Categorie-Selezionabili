@@ -24,35 +24,53 @@ const Accordion: React.FC<{
   completed,
   assigned,
   onSelect,
-  onOpen
+  onOpen,
 }) => {
-
-    return (
-      <>
-        <div className="accordion">
-          <div className="accordionHeader">
-            <div className="accordionTitle">
-              <CustomRadio onSelect={()=> { onSelect(id) }} isSelected={selected} />
-              <span>{title}</span>
-            </div>
-            <span style={{ rotate: isOpen ? "rotateZ(0)" : "rotateZ(180)"}} onClick={()=> { onOpen(id)}}>&#x2193;</span>
+  const [panel, setPanel] = useState("toggledPanel");
+  const [arrow, setArrow] = useState("basicArrow");
+  return (
+    <>
+      <div className="accordion">
+        <div className="accordionHeader">
+          <div className="accordionTitle">
+            <CustomRadio
+              onSelect={() => {
+                onSelect(id);
+              }}
+              isSelected={selected}
+            />
+            <span>{title}</span>
           </div>
-          <div className="panel"  style={{ display: isOpen ? "block" : "none"}}>
-            <p>{description}</p>
-          </div>
+          <span
+            className=""
+            onClick={() => {
+              panel === "toggledPanel"
+                ? setPanel("openedPanel")
+                : setPanel("toggledPanel");
+            }}
+          >
+            &#x2193;
+          </span>
         </div>
-      </>
-    );
-  };
+      </div>
+      <div className={panel}>
+        <p>{description}</p>
+      </div>
+    </>
+  );
+};
 
-
-  const CustomRadio = (props:any) => {
-    return <div className="customRadio" onClick={ props.onSelect }>
-      <div
+const CustomRadio = (props: any) => {
+  return (
+    <div className="customRadio" onClick={props.onSelect}>
+      <span
         className="checkedRadio"
-        style={{ backgroundColor: props.isSelected ? "white" : "blue"}}
-      ></div>
+        style={{
+          backgroundColor: props.isSelected ? "white" : "blue",
+        }}
+      ></span>
     </div>
-  }
+  );
+};
 
 export default Accordion;
