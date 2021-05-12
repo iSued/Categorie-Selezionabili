@@ -43,9 +43,12 @@ const Accordion: React.FC<{
             <span>{title}</span>
           </div>
           <span
-            className=""
+            className={arrow}
             onClick={() => {
               panel === "panel" ? setPanel("panel open") : setPanel("panel");
+              arrow === "basicArrow"
+                ? setArrow("rotatedArrow")
+                : setArrow("basicArrow");
             }}
           >
             &#x2193;
