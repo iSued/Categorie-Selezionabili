@@ -11,7 +11,7 @@
   outline: none;
   transition: max-height 0.3s;
   height: auto;
-  max-height: 500px;
+  max-height: 600px;
 }
 
 .active,
@@ -47,17 +47,86 @@
 }
 /* CSS rules for opened Panel  */
 .openedPanel {
-  transition: 0.3s all ease-in;
+  -webkit-animation: openedPanel 0.5s ease-in both;
+  animation: openedPanel 0.5s ease-in both;
+  transition: 0.2s all ease-in;
   max-height: 500px;
+}
+
+@-webkit-keyframes openedPanel {
+  0% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}
+@keyframes openedPanel {
+  0% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
 }
 
 /* CSS rules for closed Panel */
 .toggledPanel {
-  transition: 0.3s all ease-out;
+  -webkit-animation: toggledPanel 2s cubic-bezier(0.95, 0.05, 0.795, 0.035) both;
+  animation: toggledPanel 2s cubic-bezier(00.25, 0.46, 0.45, 0.94) both;
   visibility: hidden;
   overflow: hidden;
   height: 0;
   width: 0;
+}
+
+@-webkit-keyframes toggledPanel {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+}
+@keyframes toggledPanel {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 100% 0%;
+    transform-origin: 100% 0%;
+    opacity: 1;
+  }
 }
 
 .basicArrow {
