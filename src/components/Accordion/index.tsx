@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./index.css";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Accordion: React.FC<{
   id: string;
@@ -51,7 +53,7 @@ const Accordion: React.FC<{
                 : setArrow("basicArrow");
             }}
           >
-            &#x2193;
+            <FontAwesomeIcon icon={faChevronUp} />
           </span>
         </div>
         <div className={panel}>
