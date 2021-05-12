@@ -28,6 +28,7 @@ const Accordion: React.FC<{
 }) => {
   const [panel, setPanel] = useState("toggledPanel");
   const [arrow, setArrow] = useState("basicArrow");
+  const [accordion, setAccordion] = useState("accordion");
   return (
     <>
       <div className="accordion">
@@ -52,9 +53,9 @@ const Accordion: React.FC<{
             &#x2193;
           </span>
         </div>
-      </div>
-      <div className={panel}>
-        <p>{description}</p>
+        <div className={panel}>
+          <p>{description}</p>
+        </div>
       </div>
     </>
   );

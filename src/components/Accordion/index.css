@@ -6,11 +6,11 @@
   padding: 18px;
   width: 90%;
   box-shadow: 3px 3px 2.8px #888888;
-  border-top-right-radius: 2rem;
-  border-top-left-radius: 2rem;
+  border-radius: 2rem;
   border: none;
   outline: none;
 }
+
 .active,
 .accordion:hover {
   background-color: white;
@@ -45,13 +45,11 @@
 }
 /* CSS rules for opened Panel  */
 .openedPanel {
-  border-bottom-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
-  -webkit-animation: scale-in-ver-top 0.5s ease-in all;
-  animation: all scale-in-ver-top 0.5s ease-in;
+  -webkit-animation: openedPanel 0.5s ease-in both;
+  animation: openedPanel 0.5s ease-in both;
 }
 
-@-webkit-keyframes scale-in-ver-top {
+@-webkit-keyframes openedPanel {
   0% {
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
@@ -67,7 +65,7 @@
     opacity: 1;
   }
 }
-@keyframes scale-in-ver-top {
+@keyframes openedPanel {
   0% {
     -webkit-transform: scaleY(0);
     transform: scaleY(0);
@@ -83,6 +81,7 @@
     opacity: 1;
   }
 }
+
 /* CSS rules for closed Panel */
 .toggledPanel {
   -webkit-animation: scale-out-ver-top 2s cubic-bezier(0.95, 0.05, 0.795, 0.035)
@@ -130,8 +129,4 @@
 .basicArrow {
 }
 .rotatedArrow {
-}
-.scale-in-ver-top {
-  -webkit-animation: scale-in-ver-top 0.5s ease-in both;
-  animation: scale-in-ver-top 0.5s ease-in both;
 }
