@@ -13,21 +13,7 @@
   height: auto;
   max-height: 500px;
 }
-.accordionClosed {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: white;
-  color: #444;
-  padding: 18px;
-  width: 90%;
-  box-shadow: 3px 3px 2.8px #888888;
-  border-radius: 2rem;
-  border: none;
-  outline: none;
-  transition: max-height 0.3s ease-in;
-  height: auto;
-  max-height: 500px;
-}
+
 .active,
 .accordion:hover {
   background-color: white;
@@ -73,39 +59,6 @@
   overflow: hidden;
   max-height: 0;
   width: 0;
-}
-
-@-webkit-keyframes toggledPanel {
-  0% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-}
-@keyframes toggledPanel {
-  0% {
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scaleY(0);
-    transform: scaleY(0);
-    -webkit-transform-origin: 100% 0%;
-    transform-origin: 100% 0%;
-    opacity: 1;
-  }
 }
 
 .basicArrow {
