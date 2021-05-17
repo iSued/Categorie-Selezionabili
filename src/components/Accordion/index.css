@@ -6,7 +6,7 @@
   color: #444;
   padding: 18px;
   width: 90%;
-  box-shadow: 3px 3px 2.8px #cdcdcd;
+  box-shadow: 0.3px 3px 3px 2.8px #cdcdcd;
   border-radius: 2rem;
 }
 
@@ -32,7 +32,7 @@
 /* CSS rules for opened Panel  */
 .panel.open {
   max-height: 500px;
-  transition: 0.3s all ease-in;
+  transition: 15s all ease-in;
 }
 
 /* CSS rules for closed Panel */

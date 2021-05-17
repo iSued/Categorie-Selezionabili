@@ -4,14 +4,13 @@
 
 .headerContainer {
   text-align: center;
-  padding: 1rem
+  padding: 1rem;
 }
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 2;
 }
 
 .errorContainer {
