@@ -11,7 +11,7 @@ const QuizPage = (props: any) => {
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
 
-  const results = [];
+  const results: any = [];
 
   const handleQuizRender = () => {
     if (quizState.questions.length) {
@@ -42,7 +42,7 @@ const QuizPage = (props: any) => {
                   onClick={() => {
                     results.push({
                       questionId: quizState.questions[actualQuestion].id,
-                      answerIndex: el.answerIndex,
+                      answerIndex: el.index,
                     });
                     if (el.feedback) {
                       setCustomFeedback(el.feedback);
@@ -61,13 +61,18 @@ const QuizPage = (props: any) => {
                       }
                     }
                     if (actualQuestion < quizState.questions.length - 1)
-                      setTimeout(function () {
+                      setTimeout(() => {
                         setAcqualQuestion(actualQuestion + 1);
                         setDefaultFeedback("");
                         setCustomFeedback("");
-                      }, 3000);
-                    if (actualQuestion === quizState.questions.length - 1)
-                      setTimeout(function () {}, 3000);
+                      }, 2000);
+                    if (actualQuestion === quizState.questions.length - 1) {
+                      setTimeout(() => {
+                        setDefaultFeedback("");
+                        setCustomFeedback("");
+                        registerResults(results);
+                      }, 2000);
+                    }
                   }}
                 >
                   {el.text}
@@ -79,13 +84,13 @@ const QuizPage = (props: any) => {
       );
     }
   };
-
+  console.log(quizState);
   return (
     <>
       {isCompleted ? (
-        <Feedback />
+        <Feedback goodTest={true} />
       ) : isCompleted === false ? (
-        <Feedback />
+        <Feedback goodTest={false} />
       ) : (
         <div>{handleQuizRender()}</div>
       )}
