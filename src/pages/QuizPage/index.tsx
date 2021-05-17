@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./index.css";
 import Feedback from "../../components/FeedBack/index";
 import useQuiz from "./quizHook";
@@ -11,8 +11,7 @@ const QuizPage = (props: any) => {
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
 
-  const results: any = [];
-
+  const results: any = useRef([]);
   const handleQuizRender = () => {
     if (quizState.questions.length) {
       return (
@@ -40,10 +39,12 @@ const QuizPage = (props: any) => {
                 <div
                   className="option"
                   onClick={() => {
-                    results.push({
+                    results.current.push({
                       questionId: quizState.questions[actualQuestion].id,
                       answerIndex: el.index,
+                      correct: el.correct,
                     });
+
                     if (el.feedback) {
                       setCustomFeedback(el.feedback);
                     } else {
@@ -70,7 +71,8 @@ const QuizPage = (props: any) => {
                       setTimeout(() => {
                         setDefaultFeedback("");
                         setCustomFeedback("");
-                        registerResults(results);
+                        console.log(results);
+                        registerResults(results.current);
                       }, 2000);
                     }
                   }}
