@@ -74,7 +74,10 @@ type LearnerQuiz = {
   registerQuiz: (results: any) => true; // Registra le risposte ed attendi un feedback
 };
 
-const QuizPage = (quiz: LearnerQuiz) => {
+const QuizPage = (props: any) => {
+
+  const quiz:LearnerQuiz = props.quiz
+  
   const [timer, setTimer] = useState("timer");
   const handleTimer = () => {
     setTimer("timer loaded");
