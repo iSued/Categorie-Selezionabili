@@ -9,6 +9,7 @@ type QuizData = {
     answerIndex: number;
     correct: boolean;
   }[];
+  showFeedbacks: boolean;
   feedbacks: {
     wrong: string; // String che appare in schermata feedback quiz se non superato
     correct: string; // String che appare n schermata feedback quiz se superato

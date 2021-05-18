@@ -7,6 +7,7 @@ type QuizData = {
     answerIndex: number;
     correct: boolean;
   }[];
+  showFeedbacks: boolean;
   feedbacks: {
     wrong: string; // String che appare in schermata feedback quiz se non superato
     correct: string; // String che appare n schermata feedback quiz se superato
@@ -33,6 +34,7 @@ const fakeData: QuizData = {
   points: 3, // I punti che si guadagnano quando si fa un quiz
   goal: 1, // Il numero minimo di risposte corrette per considerare il quiz corretto
   result: [],
+  showFeedbacks: true,
   feedbacks: {
     wrong: "Hai sbagliato il quiz", // String che appare in schermata ? quiz se non superato
     correct: "Hai fatto bene il quiz", // String che appare n schermata ? quiz se superato

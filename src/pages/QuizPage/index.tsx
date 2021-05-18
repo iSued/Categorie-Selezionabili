@@ -33,8 +33,6 @@ const QuizPage = (props: any) => {
             </div>
           ) : (
             quizState.questions[actualQuestion].answers.map((el: any) => {
-              if (el.feedback) {
-              }
               return (
                 <div
                   className="option"
@@ -44,36 +42,51 @@ const QuizPage = (props: any) => {
                       answerIndex: el.index,
                       correct: el.correct,
                     });
-
-                    if (el.feedback) {
-                      setCustomFeedback(el.feedback);
-                    } else {
-                      if (el.correct) {
-                        setDefaultFeedback(
-                          quizState.questions[actualQuestion].default_feedback
-                            .correct
-                        );
-                      }
-                      if (!el.correct) {
-                        setDefaultFeedback(
-                          quizState.questions[actualQuestion].default_feedback
-                            .wrong
-                        );
+                    if (quizState.showFeedbacks) {
+                      if (el.feedback) {
+                        setCustomFeedback(el.feedback);
+                      } else {
+                        if (el.correct) {
+                          setDefaultFeedback(
+                            quizState.questions[actualQuestion].default_feedback
+                              .correct
+                          );
+                        }
+                        if (!el.correct) {
+                          setDefaultFeedback(
+                            quizState.questions[actualQuestion].default_feedback
+                              .wrong
+                          );
+                        }
                       }
                     }
-                    if (actualQuestion < quizState.questions.length - 1)
-                      setTimeout(() => {
+                    if (quizState.showFeedbacks) {
+                      if (actualQuestion < quizState.questions.length - 1)
+                        setTimeout(() => {
+                          setAcqualQuestion(actualQuestion + 1);
+                          setDefaultFeedback("");
+                          setCustomFeedback("");
+                        }, 2000);
+                      if (actualQuestion === quizState.questions.length - 1) {
+                        setTimeout(() => {
+                          setDefaultFeedback("");
+                          setCustomFeedback("");
+                          console.log(results);
+                          registerResults(results.current);
+                        }, 2000);
+                      }
+                    } else {
+                      if (actualQuestion < quizState.questions.length - 1)
                         setAcqualQuestion(actualQuestion + 1);
-                        setDefaultFeedback("");
-                        setCustomFeedback("");
-                      }, 2000);
-                    if (actualQuestion === quizState.questions.length - 1) {
-                      setTimeout(() => {
+                      setDefaultFeedback("");
+                      setCustomFeedback("");
+
+                      if (actualQuestion === quizState.questions.length - 1) {
                         setDefaultFeedback("");
                         setCustomFeedback("");
                         console.log(results);
                         registerResults(results.current);
-                      }, 2000);
+                      }
                     }
                   }}
                 >
