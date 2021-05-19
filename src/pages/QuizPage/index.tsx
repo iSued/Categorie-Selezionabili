@@ -4,7 +4,7 @@ import Feedback from "../../components/FeedBack/index";
 import useQuiz from "./quizHook";
 import fakeData from "./fakeData";
 
-const QuizPage = (props: any) => {
+const QuizPage = () => {
   const { quizState, registerResults, isCompleted } = useQuiz(fakeData);
   const [timer, setTimer] = useState("timer");
   const [actualQuestion, setAcqualQuestion] = useState(0);
