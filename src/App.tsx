@@ -27,11 +27,11 @@ library.add(
 
 function App() {
 
-  const [isOpen, setIsOpen] = React.useState(true)
+  const [isOpen, setIsOpen] = React.useState(false)
 
   return (
     <div>
-      <Drawer toggled={false} />
+      <Drawer toggled={isOpen} />
       <button onClick={() => setIsOpen(!isOpen)}>Open</button>
     </div>
   );
