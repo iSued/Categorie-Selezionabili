@@ -11,6 +11,7 @@ import {
   faChartPie,
   faEllipsisH,
   faInfoCircle,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -20,23 +21,14 @@ library.add(
   faUserAlt,
   faChartPie,
   faEllipsisH,
-  faInfoCircle
+  faInfoCircle,
+  faHome
 );
-
-const list = [
-  ["font", "glossario"],
-  ["book", "libri"],
-  ["bookmark", "preferiti"],
-  ["user-alt", "profilo"],
-  ["chart-pie", "i miei progressi"],
-  ["ellipsis-h", "impostazioni"],
-  ["infoCircle", "about"],
-];
 
 function App() {
   return (
     <div>
-      <Drawer toggled={true} list={list} />
+      <Drawer toggled={true} />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useMenu from "./useMenu";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const useStyles = makeStyles({
   listContainer: {
@@ -12,24 +13,32 @@ const useStyles = makeStyles({
     backgroundColor: "blue",
     color: "white",
   },
-  main: {},
-  bottom: {},
-  option: {},
+  menuContainer: {
+    height: "80%",
+    width: "80%",
+    margin: "auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+  },
+  main: { display: "flex", flexFlow: "column wrap" },
+  bottom: { display: "flex", flexFlow: "column wrap" },
+  footer: {},
   icon: {},
   menuItemTitle: { marginLeft: "1.5rem" },
-  menuItem: {},
+  menuItem: { cursor: "pointer" },
+  title: {},
 });
 
 const SwipeableTemporaryDrawer: React.FC<{
   toggled: boolean;
-  list: any;
 }> = ({ toggled }) => {
   const [menu] = useState({ ...useMenu() });
   const classes = useStyles();
   const [state, setState] = useState({
     left: toggled,
   });
-  console.log("this is the menu", menu.drawer.main);
+
   const toggleDrawer = (open: boolean) => (event: any) => {
     setState({ left: open });
   };
@@ -42,22 +51,44 @@ const SwipeableTemporaryDrawer: React.FC<{
         onKeyDown={toggleDrawer(false)}
         className={classes.listContainer}
       >
-        <div className={classes.main}>
-          {menu.drawer.main.map((el) => {
-            return (
-              <div className={classes.menuItem}>
-                <span className={classes.icon}>
-                  <FontAwesomeIcon icon={"" + el.icon} />
-                </span>
-                <span className={classes.menuItemTitle}>{el.label}</span>
-              </div>
-            );
-          })}
-        </div>
-        <div className={classes.bottom}>
-          <div className={classes.menuItem}>
-            <span className={classes.icon}>icon</span>
-            <span className={classes.menuItemTitle}>title</span>
+        <div className={classes.menuContainer}>
+          <div className={classes.title}>
+            <h1>Title</h1>
+          </div>
+          <div className={classes.main}>
+            {menu.drawer.main.map((el) => {
+              return (
+                <div
+                  className={classes.menuItem}
+                  style={{ order: el.order }}
+                  onClick={() => console.log(el.label)}
+                >
+                  <span className={classes.icon}>
+                    <FontAwesomeIcon icon={el.icon as IconProp} />
+                  </span>
+                  <span className={classes.menuItemTitle}>{el.label}</span>
+                </div>
+              );
+            })}
+          </div>
+          <div className={classes.bottom}>
+            {menu.drawer.bottom.map((el) => {
+              return (
+                <div
+                  className={classes.menuItem}
+                  style={{ order: el.order }}
+                  onClick={() => console.log(el.label)}
+                >
+                  <span className={classes.icon}>
+                    <FontAwesomeIcon icon={el.icon as IconProp} />
+                  </span>
+                  <span className={classes.menuItemTitle}>{el.label}</span>
+                </div>
+              );
+            })}
+          </div>
+          <div className={classes.footer}>
+            {menu.footer ? <div>footer</div> : null}
           </div>
         </div>
       </div>
