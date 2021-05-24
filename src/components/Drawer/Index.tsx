@@ -41,17 +41,13 @@ const useStyles = makeStyles({
 
 const SwipeableDrawer: React.FC<{
   toggled: boolean;
-}> = ({ toggled }) => {
-  const [menu] = useState({ ...useMenu() });
+  open: any;
+  close: any;
+}> = ({ toggled, open, close }) => {
+
+  const menu = useMenu()
+
   const classes = useStyles();
-  const [state, setState] = useState(false);
-  useEffect(() => {
-    if (state === !toggled) {
-      setState(toggled);
-    } else {
-      setState(!toggled);
-    }
-  }, [toggled]);
 
   const list = () => {
     return (
@@ -61,7 +57,7 @@ const SwipeableDrawer: React.FC<{
             icon="arrow-left"
             className={classes.arrow}
             onClick={() => {
-              setState(false);
+              close();
             }}
           />
         </div>
@@ -77,7 +73,7 @@ const SwipeableDrawer: React.FC<{
                   style={{ order: el.order }}
                   onClick={() => {
                     console.log(el.label);
-                    setState(false);
+                    close();
                   }}
                 >
                   <span className={classes.icon}>
@@ -117,9 +113,9 @@ const SwipeableDrawer: React.FC<{
         <Drawer
           variant="persistent"
           anchor="left"
-          open={state}
+          open={toggled}
           onClose={() => {
-            setState(false);
+            close();
           }}
         >
           {list()}

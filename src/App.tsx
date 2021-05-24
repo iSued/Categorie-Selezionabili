@@ -31,6 +31,7 @@ library.add(
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <div>
       <button
@@ -40,7 +41,7 @@ function App() {
       >
         bottone
       </button>
-      <Drawer toggled={isOpen}/>
+      <Drawer toggled={isOpen} open={() =>{ setIsOpen(true)}} close={() =>{ setIsOpen(false)}} />
     </div>
   );
 }
