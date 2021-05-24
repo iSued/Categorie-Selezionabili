@@ -41,11 +41,10 @@ const useStyles = makeStyles({
 
 const SwipeableDrawer: React.FC<{
   toggled: boolean;
-  open: any;
-  close: any;
+  open: () => void;
+  close: () => void;
 }> = ({ toggled, open, close }) => {
-
-  const menu = useMenu()
+  const menu = useMenu();
 
   const classes = useStyles();
 

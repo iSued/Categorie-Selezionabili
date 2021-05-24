@@ -30,26 +30,23 @@ library.add(
 );
 
 const useDrawer = () => {
-
   const [isOpen, setIsOpen] = React.useState(false);
 
-  return { 
+  return {
     isOpen,
-    open: ()=> setIsOpen(true),
-    close: ()=>setIsOpen(false)
-  }
-
-}
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
+  };
+};
 
 function App() {
-
   const { isOpen, open, close } = useDrawer();
 
   return (
     <div>
       <button
         onClick={() => {
-          open()
+          open();
         }}
       >
         bottone

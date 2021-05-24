@@ -23,7 +23,7 @@ type MenuItem = {
 };
 
 type MenuItemOptionGeneric = {
-  [key: string]: any;
+  key: string[];
 };
 
 type MenuItemOptionCategory = {

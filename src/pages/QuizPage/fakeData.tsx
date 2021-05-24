@@ -73,7 +73,7 @@ const fakeData: QuizData = {
       id: "domanda2", //
       index: 1,
       question: "Come si chiama il fratello di Lisa?",
-      timeAmount: 5,
+      timeAmount: 2,
       default_feedback: {
         wrong: "Dovresti studiare i Simpson",
         correct: "bravo!",

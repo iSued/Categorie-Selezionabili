@@ -53,6 +53,7 @@ const useQuiz = (quizData: QuizData) => {
 
   const registerResults = (results: any[]) => {
     // registra su DB
+    console.log(results);
     setQuizState({ ...quizState, result: results });
   };
 
