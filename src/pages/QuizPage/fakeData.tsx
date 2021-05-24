@@ -16,6 +16,7 @@ type QuizData = {
     id: string; //
     index: number;
     question: string;
+    timeAmount: number;
     default_feedback: {
       wrong: string;
       correct: string;
@@ -44,6 +45,7 @@ const fakeData: QuizData = {
       id: "domanda1", //
       index: 1,
       question: "Come si chiama il padre di Lisa?",
+      timeAmount: 10,
       default_feedback: {
         wrong: "Dovresti studiare i Simpson",
         correct: "bravo!",
@@ -71,6 +73,7 @@ const fakeData: QuizData = {
       id: "domanda2", //
       index: 1,
       question: "Come si chiama il fratello di Lisa?",
+      timeAmount: 5,
       default_feedback: {
         wrong: "Dovresti studiare i Simpson",
         correct: "bravo!",

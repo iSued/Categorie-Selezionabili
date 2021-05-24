@@ -18,6 +18,7 @@ type QuizData = {
     id: string; //
     index: number;
     question: string;
+    timeAmount: number;
     default_feedback: {
       wrong: string;
       correct: string;

@@ -30,9 +30,17 @@ library.add(
 );
 
 function App() {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <div>
-      <Quiz />
+      <button
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        bottone
+      </button>
+      <Drawer toggled={isOpen}/>
     </div>
   );
 }

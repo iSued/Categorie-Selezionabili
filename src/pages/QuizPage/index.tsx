@@ -10,9 +10,12 @@ const QuizPage = () => {
     class: "timer",
     time: 0,
   });
-  const [actualQuestion, setAcqualQuestion] = useState(0);
+  const [actualQuestion, setActualQuestion] = useState(0);
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
+  const [timeAmount, setTimeAmount] = useState(
+    quizState.questions[actualQuestion].timeAmount
+  );
   const [outOfTime, setOutOfTime] = useState(false);
   const results: any = useRef([]);
 
@@ -29,9 +32,40 @@ const QuizPage = () => {
       });
     }
   };
+
   useEffect(() => {
-    handleTimer(true, 20);
+    setTimeAmount(4);
   }, [actualQuestion]);
+
+  useEffect(() => {
+    if (outOfTime === false) {
+      handleTimer(true, timeAmount);
+      const timer = setTimeout(() => {
+        setOutOfTime(true);
+      }, timeAmount * 1000);
+      return () => clearTimeout(timer);
+    }
+    if (outOfTime) {
+      if (actualQuestion < quizState.questions.length - 1) {
+        handleTimer(false, 0);
+        setCustomFeedback("out of time ");
+        setTimeout(() => {
+          setCustomFeedback("");
+          setOutOfTime(false);
+          setActualQuestion(actualQuestion + 1);
+        }, 2000);
+      }
+      if (actualQuestion === quizState.questions.length - 1) {
+        handleTimer(false, 0);
+        setCustomFeedback("out of time ");
+        setTimeout(() => {
+          setCustomFeedback("");
+          setOutOfTime(false);
+          registerResults(results.current);
+        }, 2000);
+      }
+    }
+  }, [actualQuestion, outOfTime]);
 
   const handleQuizRender = () => {
     if (quizState.questions.length) {
@@ -62,11 +96,19 @@ const QuizPage = () => {
             </div>
           ) : (
             quizState.questions[actualQuestion].answers.map((el: any) => {
+              if (outOfTime) {
+                results.current.push({
+                  questionId: quizState.questions[actualQuestion].id,
+                  answerIndex: null,
+                  correct: false,
+                });
+              }
               return (
                 <div
                   className="option"
                   onClick={() => {
                     handleTimer(false, 0);
+                    setOutOfTime(false);
                     results.current.push({
                       questionId: quizState.questions[actualQuestion].id,
                       answerIndex: el.index,
@@ -93,7 +135,7 @@ const QuizPage = () => {
                     if (quizState.showFeedbacks) {
                       if (actualQuestion < quizState.questions.length - 1)
                         setTimeout(() => {
-                          setAcqualQuestion(actualQuestion + 1);
+                          setActualQuestion(actualQuestion + 1);
                           setDefaultFeedback("");
                           setCustomFeedback("");
                         }, 2000);
@@ -106,7 +148,7 @@ const QuizPage = () => {
                       }
                     } else {
                       if (actualQuestion < quizState.questions.length - 1)
-                        setAcqualQuestion(actualQuestion + 1);
+                        setActualQuestion(actualQuestion + 1);
                       setDefaultFeedback("");
                       setCustomFeedback("");
 
