@@ -29,19 +29,32 @@ library.add(
   faHome
 );
 
-function App() {
+const useDrawer = () => {
+
   const [isOpen, setIsOpen] = React.useState(false);
+
+  return { 
+    isOpen,
+    open: ()=> setIsOpen(true),
+    close: ()=>setIsOpen(false)
+  }
+
+}
+
+function App() {
+
+  const { isOpen, open, close } = useDrawer();
 
   return (
     <div>
       <button
         onClick={() => {
-          setIsOpen(!isOpen);
+          open()
         }}
       >
         bottone
       </button>
-      <Drawer toggled={isOpen} open={() =>{ setIsOpen(true)}} close={() =>{ setIsOpen(false)}} />
+      <Drawer toggled={isOpen} open={open} close={close} />
     </div>
   );
 }
