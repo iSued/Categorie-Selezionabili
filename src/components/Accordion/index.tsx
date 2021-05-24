@@ -44,13 +44,13 @@ const Accordion: React.FC<{
           <span
             className={isOpen ? "basicArrow rotated" : "basicArrow"}
             onClick={() => {
-              onOpen(id)
+              onOpen(id);
             }}
           >
             <FontAwesomeIcon icon={faChevronUp} />
           </span>
         </div>
-        <div className={ isOpen ? "panel open" : "panel"}>
+        <div className={isOpen ? "panel open" : "panel"}>
           <p>{description}</p>
         </div>
       </div>

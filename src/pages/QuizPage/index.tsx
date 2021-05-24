@@ -13,6 +13,8 @@ const QuizPage = () => {
   const [actualQuestion, setAcqualQuestion] = useState(0);
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
+  const [outOfTime, setOutOfTime] = useState(false);
+  const results: any = useRef([]);
 
   const handleTimer = (timer: boolean, time: number) => {
     if (timer) {
@@ -28,9 +30,9 @@ const QuizPage = () => {
     }
   };
   useEffect(() => {
-    handleTimer(true, 25);
+    handleTimer(true, 20);
   }, [actualQuestion]);
-  const results: any = useRef([]);
+
   const handleQuizRender = () => {
     if (quizState.questions.length) {
       return (
