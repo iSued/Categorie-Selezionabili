@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Button from "@material-ui/core/Button";
+import Drawer from "@material-ui/core/Drawer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useMenu from "./useMenu";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -12,6 +11,16 @@ const useStyles = makeStyles({
     height: "100%",
     backgroundColor: "blue",
     color: "white",
+  },
+  arrowContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "end",
+    padding: "1rem",
+  },
+  arrow: {
+    fontSize: "1.5rem",
+    cursor: "pointer",
   },
   menuContainer: {
     height: "80%",
@@ -30,27 +39,32 @@ const useStyles = makeStyles({
   title: {},
 });
 
-const SwipeableTemporaryDrawer: React.FC<{
+const SwipeableDrawer: React.FC<{
   toggled: boolean;
 }> = ({ toggled }) => {
   const [menu] = useState({ ...useMenu() });
   const classes = useStyles();
-  const [state, setState] = useState({
-    left: toggled,
-  });
-
-  const toggleDrawer = (open: boolean) => (event: any) => {
-    setState({ left: open });
-  };
+  const [state, setState] = useState(false);
+  useEffect(() => {
+    if (state === !toggled) {
+      setState(toggled);
+    } else {
+      setState(!toggled);
+    }
+  }, [toggled]);
 
   const list = () => {
     return (
-      <div
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-        className={classes.listContainer}
-      >
+      <div role="presentation" className={classes.listContainer}>
+        <div className={classes.arrowContainer}>
+          <FontAwesomeIcon
+            icon="arrow-left"
+            className={classes.arrow}
+            onClick={() => {
+              setState(false);
+            }}
+          />
+        </div>
         <div className={classes.menuContainer}>
           <div className={classes.title}>
             <h1>Title</h1>
@@ -61,7 +75,10 @@ const SwipeableTemporaryDrawer: React.FC<{
                 <div
                   className={classes.menuItem}
                   style={{ order: el.order }}
-                  onClick={() => console.log(el.label)}
+                  onClick={() => {
+                    console.log(el.label);
+                    setState(false);
+                  }}
                 >
                   <span className={classes.icon}>
                     <FontAwesomeIcon icon={el.icon as IconProp} />
@@ -97,18 +114,19 @@ const SwipeableTemporaryDrawer: React.FC<{
   return (
     <div>
       <React.Fragment>
-        <Button onClick={toggleDrawer(true)}>left</Button>
-        <SwipeableDrawer
+        <Drawer
+          variant="persistent"
           anchor="left"
-          open={state["left"]}
-          onClose={toggleDrawer(false)}
-          onOpen={toggleDrawer(true)}
+          open={state}
+          onClose={() => {
+            setState(false);
+          }}
         >
           {list()}
-        </SwipeableDrawer>
+        </Drawer>
       </React.Fragment>
     </div>
   );
 };
 
-export default SwipeableTemporaryDrawer;
+export default SwipeableDrawer;

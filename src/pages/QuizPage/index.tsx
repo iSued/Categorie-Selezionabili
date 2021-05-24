@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
 import Feedback from "../../components/FeedBack/index";
 import useQuiz from "./quizHook";
@@ -6,17 +6,44 @@ import fakeData from "./fakeData";
 
 const QuizPage = () => {
   const { quizState, registerResults, isCompleted } = useQuiz(fakeData);
-  const [timer, setTimer] = useState("timer");
+  const [timer, setTimer] = useState({
+    class: "timer",
+    time: 0,
+  });
   const [actualQuestion, setAcqualQuestion] = useState(0);
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
 
+  const handleTimer = (timer: boolean, time: number) => {
+    if (timer) {
+      setTimer({
+        class: "timer loaded",
+        time: time,
+      });
+    } else {
+      setTimer({
+        class: "timer ",
+        time: 0,
+      });
+    }
+  };
+  useEffect(() => {
+    handleTimer(true, 25);
+  }, [actualQuestion]);
   const results: any = useRef([]);
   const handleQuizRender = () => {
     if (quizState.questions.length) {
       return (
         <>
-          <div className={timer}></div>
+          <div
+            className={timer.class}
+            style={{
+              transition:
+                timer.class === "timer loaded"
+                  ? ` ${timer.time}s all ease-out`
+                  : ` 0.3s all ease-out`,
+            }}
+          ></div>
           <div className="questionContainer">
             <h4 className="questionTitle">
               {quizState.questions[actualQuestion].question}
@@ -37,6 +64,7 @@ const QuizPage = () => {
                 <div
                   className="option"
                   onClick={() => {
+                    handleTimer(false, 0);
                     results.current.push({
                       questionId: quizState.questions[actualQuestion].id,
                       answerIndex: el.index,
@@ -71,7 +99,6 @@ const QuizPage = () => {
                         setTimeout(() => {
                           setDefaultFeedback("");
                           setCustomFeedback("");
-                          console.log(results);
                           registerResults(results.current);
                         }, 2000);
                       }
@@ -84,7 +111,7 @@ const QuizPage = () => {
                       if (actualQuestion === quizState.questions.length - 1) {
                         setDefaultFeedback("");
                         setCustomFeedback("");
-                        console.log(results);
+
                         registerResults(results.current);
                       }
                     }

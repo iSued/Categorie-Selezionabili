@@ -32,7 +32,7 @@
 /* CSS rules for opened Panel  */
 .panel.open {
   max-height: 500px;
-  transition: 15s all ease-in;
+  transition: 0.3 all ease-in;
 }
 
 /* CSS rules for closed Panel */

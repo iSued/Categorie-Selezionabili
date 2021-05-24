@@ -2,6 +2,8 @@ import React from "react";
 
 import "./App.css";
 import Drawer from "./components/Drawer/Index";
+import Accordion from "./pages/InterestsPage/index";
+import Quiz from "./pages/QuizPage/index";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faFont,
@@ -12,9 +14,11 @@ import {
   faEllipsisH,
   faInfoCircle,
   faHome,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
+  faArrowLeft,
   faFont,
   faBook,
   faBookmark,
@@ -26,13 +30,9 @@ library.add(
 );
 
 function App() {
-
-  const [isOpen, setIsOpen] = React.useState(false)
-
   return (
     <div>
-      <Drawer toggled={isOpen} />
-      <button onClick={() => setIsOpen(!isOpen)}>Open</button>
+      <Quiz />
     </div>
   );
 }
