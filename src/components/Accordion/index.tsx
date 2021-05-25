@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.css";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,8 +13,8 @@ const Accordion: React.FC<{
   selectable: boolean;
   completed: boolean;
   assigned: boolean;
-  onSelect: any;
-  onOpen: any;
+  onSelect: (id: string) => void;
+  onOpen: (id: string) => void;
 }> = ({
   id,
   isOpen,

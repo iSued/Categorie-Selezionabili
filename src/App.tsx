@@ -44,14 +44,7 @@ function App() {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          open();
-        }}
-      >
-        bottone
-      </button>
-      <Drawer toggled={isOpen} open={open} close={close} />
+      <Quiz />
     </div>
   );
 }

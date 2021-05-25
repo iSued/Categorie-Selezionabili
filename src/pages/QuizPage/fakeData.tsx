@@ -45,7 +45,7 @@ const fakeData: QuizData = {
       id: "domanda1", //
       index: 1,
       question: "Come si chiama il padre di Lisa?",
-      timeAmount: 10,
+      timeAmount: 5,
       default_feedback: {
         wrong: "Dovresti studiare i Simpson",
         correct: "bravo!",

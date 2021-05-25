@@ -13,9 +13,6 @@ const QuizPage = () => {
   const [actualQuestion, setActualQuestion] = useState(0);
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
-  const [timeAmount, setTimeAmount] = useState<number>(
-    quizState.questions[actualQuestion].timeAmount
-  );
   const [outOfTime, setOutOfTime] = useState<boolean | null>(false);
   interface Result {
     questionId: string;
@@ -40,12 +37,11 @@ const QuizPage = () => {
   };
 
   useEffect(() => {
-    console.log(quizState.questions[actualQuestion].timeAmount);
     if (outOfTime === false) {
-      handleTimer(true, timeAmount);
+      handleTimer(true, quizState.questions[actualQuestion].timeAmount);
       const timer = setTimeout(() => {
         setOutOfTime(true);
-      }, timeAmount * 1000);
+      }, quizState.questions[actualQuestion].timeAmount * 1000);
       return () => clearTimeout(timer);
     }
     if (outOfTime) {
@@ -58,11 +54,12 @@ const QuizPage = () => {
         handleTimer(false, 0);
         setCustomFeedback("out of time ");
         setTimeout(() => {
+          setActualQuestion(actualQuestion + 1);
+          setDefaultFeedback("");
           setCustomFeedback("");
           setOutOfTime(false);
-
-          setActualQuestion(actualQuestion + 1);
         }, 2000);
+        return () => {};
       }
       if (actualQuestion === quizState.questions.length - 1) {
         results.current.push({
@@ -70,12 +67,12 @@ const QuizPage = () => {
           answerIndex: null,
           correct: false,
         });
-        handleTimer(false, 0);
-        setOutOfTime(null);
+
         setCustomFeedback("out of time");
         setTimeout(() => {
-          setCustomFeedback("");
           registerResults(results.current);
+          setOutOfTime(null);
+          handleTimer(false, 0);
         }, 2000);
       }
     }
@@ -153,6 +150,7 @@ const QuizPage = () => {
                             setCustomFeedback("");
                           }, 2000);
                         if (actualQuestion === quizState.questions.length - 1) {
+                          setOutOfTime(null);
                           setTimeout(() => {
                             setDefaultFeedback("");
                             setCustomFeedback("");

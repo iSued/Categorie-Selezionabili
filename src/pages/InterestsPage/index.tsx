@@ -46,8 +46,8 @@ const useCategoryHook = () => {
     },
   });
 
-  const toggleCategory = (catId: any) => {
-    var newData: any = { ...data };
+  const toggleCategory = (catId: string) => {
+    let newData: any = { ...data };
     newData[catId].selected = !newData[catId].selected;
     setData({ ...newData });
   };
@@ -63,7 +63,8 @@ const InterestsPage = () => {
   // toggleCategory(idCategoria) => void
 
   const [isError, setIsError] = useState(true);
-  const [openAccordionId, setOpenAccordionId] = React.useState<any>(null);
+  const [openAccordionId, setOpenAccordionId] =
+    React.useState<string | null>(null);
 
   return (
     <>
@@ -95,7 +96,7 @@ const InterestsPage = () => {
               completed={element[1].completed}
               assigned={element[1].assigned}
               onOpen={(id: string) => {
-                if (id == openAccordionId) {
+                if (id === openAccordionId) {
                   setOpenAccordionId(null);
                 } else {
                   setOpenAccordionId(id);
