@@ -36,47 +36,7 @@ const QuizPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (outOfTime === false) {
-      handleTimer(true, quizState.questions[actualQuestion].timeAmount);
-      const timer = setTimeout(() => {
-        setOutOfTime(true);
-      }, quizState.questions[actualQuestion].timeAmount * 1000);
-      return () => clearTimeout(timer);
-    }
-    if (outOfTime) {
-      if (actualQuestion < quizState.questions.length - 1) {
-        results.current.push({
-          questionId: quizState.questions[actualQuestion].id,
-          answerIndex: null,
-          correct: false,
-        });
-        handleTimer(false, 0);
-        setCustomFeedback("out of time ");
-        setTimeout(() => {
-          setActualQuestion(actualQuestion + 1);
-          setDefaultFeedback("");
-          setCustomFeedback("");
-          setOutOfTime(false);
-        }, 2000);
-        return () => {};
-      }
-      if (actualQuestion === quizState.questions.length - 1) {
-        results.current.push({
-          questionId: quizState.questions[actualQuestion].id,
-          answerIndex: null,
-          correct: false,
-        });
-
-        setCustomFeedback("out of time");
-        setTimeout(() => {
-          registerResults(results.current);
-          setOutOfTime(null);
-          handleTimer(false, 0);
-        }, 2000);
-      }
-    }
-  }, [actualQuestion, outOfTime]);
+  useEffect(() => {}, [actualQuestion, outOfTime]);
 
   const handleQuizRender = () => {
     if (quizState.questions.length) {
@@ -149,7 +109,7 @@ const QuizPage = () => {
                             setDefaultFeedback("");
                             setCustomFeedback("");
                           }, 2000);
-                        if (actualQuestion === quizState.questions.length - 1) {
+                        else {
                           setOutOfTime(null);
                           setTimeout(() => {
                             setDefaultFeedback("");
@@ -158,12 +118,11 @@ const QuizPage = () => {
                           }, 2000);
                         }
                       } else {
-                        if (actualQuestion < quizState.questions.length - 1)
+                        if (actualQuestion < quizState.questions.length - 1) {
                           setActualQuestion(actualQuestion + 1);
-                        setDefaultFeedback("");
-                        setCustomFeedback("");
-
-                        if (actualQuestion === quizState.questions.length - 1) {
+                          setDefaultFeedback("");
+                          setCustomFeedback("");
+                        } else {
                           setDefaultFeedback("");
                           setCustomFeedback("");
                           registerResults(results.current);
