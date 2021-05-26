@@ -1,74 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AccordionOption from "./sub-components/index";
 
-const Accordion: React.FC<{
-  id: string;
-  isOpen: boolean;
-  title: string;
-  description: string;
-  selected: boolean;
-  mandatory: boolean;
-  selectable: boolean;
-  completed: boolean;
-  assigned: boolean;
-  onSelect: (id: string) => void;
-  onOpen: (id: string) => void;
-}> = ({
-  id,
-  isOpen,
-  title,
-  description,
-  selected,
-  mandatory,
-  selectable,
-  completed,
-  assigned,
-  onSelect,
-  onOpen,
-}) => {
+const useCategoryHook = () => {
+  const [data, setData] = useState({
+    cat1: {
+      catId: "cat1",
+      title: "Titolo1",
+      description: "Descrizione 1",
+      selected: false,
+      mandatory: false,
+      selectable: false,
+      completed: true,
+      assigned: false,
+    },
+    cat2: {
+      catId: "cat2",
+      title: "Titolo2",
+      description: "Descrizione 2",
+      selected: false,
+      mandatory: false,
+      selectable: false,
+      completed: true,
+      assigned: false,
+    },
+    cat3: {
+      catId: "cat3",
+      title: "Titolo3",
+      description: "Descrizione 3",
+      selected: false,
+      mandatory: false,
+      selectable: false,
+      completed: true,
+      assigned: false,
+    },
+    cat4: {
+      catId: "cat4",
+      title: "Titolo4",
+      description: "Descrizione 4",
+      selected: false,
+      mandatory: false,
+      selectable: false,
+      completed: true,
+      assigned: false,
+    },
+  });
+
+  const toggleCategory = (catId: string) => {
+    let newData: any = { ...data };
+    newData[catId].selected = !newData[catId].selected;
+    setData({ ...newData });
+  };
+
+  return { data: new Map(Object.entries(data)), toggleCategory };
+};
+
+const InterestsPage = () => {
+  const { data, toggleCategory } = useCategoryHook();
+
+  // data
+  // error
+  // toggleCategory(idCategoria) => void
+
+  const [isError, setIsError] = useState(true);
+  const [openAccordionId, setOpenAccordionId] =
+    React.useState<string | null>(null);
+
   return (
     <>
-      <div className="accordion">
-        <div className="accordionHeader">
-          <div className="accordionTitle">
-            <CustomRadio
-              onSelect={() => {
-                onSelect(id);
+      {isError ? (
+        <div className="errorContainer">
+          <p>
+            Seleziona massimo <strong>4 aree</strong> di interesse
+          </p>
+          <p>Potrai modificare le tue scelte di settimana in settimana</p>
+        </div>
+      ) : null}
+      <div className="headerContainer">
+        <h4 className="sectionTitle">
+          Quale credi che sia il tuo livello di cultura digitale?
+        </h4>
+      </div>
+
+      <div className="list">
+        {[...data].map((element) => {
+          return (
+            <AccordionOption
+              id={element[0]}
+              isOpen={element[0] === openAccordionId ? true : false}
+              title={element[1].title}
+              description={element[1].description}
+              selected={element[1].selected}
+              mandatory={element[1].mandatory}
+              selectable={element[1].selectable}
+              completed={element[1].completed}
+              assigned={element[1].assigned}
+              onOpen={(id: string) => {
+                if (id === openAccordionId) {
+                  setOpenAccordionId(null);
+                } else {
+                  setOpenAccordionId(id);
+                }
               }}
-              isSelected={selected}
+              onSelect={toggleCategory}
             />
-            <span>{title}</span>
-          </div>
-          <span
-            className={isOpen ? "basicArrow rotated" : "basicArrow"}
-            onClick={() => {
-              onOpen(id);
-            }}
-          >
-            <FontAwesomeIcon icon={faChevronUp} />
-          </span>
-        </div>
-        <div className={isOpen ? "panel open" : "panel"}>
-          <p>{description}</p>
-        </div>
+          );
+        })}
+      </div>
+      <div className="button">
+        <button>avanti</button>
       </div>
     </>
   );
 };
 
-const CustomRadio = (props: any) => {
-  return (
-    <div className="customRadio" onClick={props.onSelect}>
-      <span
-        className="checkedRadio"
-        style={{
-          backgroundColor: props.isSelected ? "white" : "blue",
-        }}
-      ></span>
-    </div>
-  );
-};
-
-export default Accordion;
+export default InterestsPage;

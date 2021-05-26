@@ -1,61 +1,25 @@
-.accordion {
-  margin: auto;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  background-color: white;
-  color: #444;
-  padding: 18px;
-  width: 90%;
-  box-shadow: 0.3px 3px 3px 2.8px #cdcdcd;
-  border-radius: 2rem;
-}
-
-.customRadio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 1rem;
-  border: 2px solid blue;
-  border-radius: 200px;
-  width: 25px;
-  height: 25px;
-}
-.checkedRadio {
-  margin: auto;
-  align-self: center;
-  justify-self: center;
-  border-radius: 10px;
-  width: 15px;
-  height: 15px;
-  margin: auto;
-}
-/* CSS rules for opened Panel  */
-.panel.open {
-  max-height: 500px;
-  transition: 0.3 all ease-in;
-}
-
-/* CSS rules for closed Panel */
-.panel {
-  max-height: 0;
-  transition: 0.3s all ease-out;
+.list {
   overflow: hidden;
 }
 
-.basicArrow {
-  cursor: pointer;
-  transition-duration: 0.3s;
-  font-weight: bold;
-}
-.basicArrow.rotated {
-  transform: rotateX(180deg);
+.headerContainer {
+  text-align: center;
+  padding: 1rem;
 }
 
-.accordionHeader {
+.button {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
-.accordionTitle {
+
+.errorContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  background-color: red;
+  color: white;
 }

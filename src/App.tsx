@@ -2,7 +2,7 @@ import React from "react";
 
 import "./App.css";
 import Drawer from "./components/Drawer/Index";
-import Accordion from "./pages/InterestsPage/index";
+import Accordion from "./components/Accordion/index";
 import Quiz from "./pages/QuizPage/index";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div>
-      <Quiz />
+      <Accordion />
     </div>
   );
 }

@@ -36,8 +36,6 @@ const QuizPage = () => {
     }
   };
 
-  useEffect(() => {}, [actualQuestion, outOfTime]);
-
   const handleQuizRender = () => {
     if (quizState.questions.length) {
       return (
@@ -48,7 +46,7 @@ const QuizPage = () => {
               transition:
                 timer.class === "timer loaded"
                   ? ` ${timer.time}s all ease-out`
-                  : ` 0.3s all ease-out`,
+                  : ` 0.2s all ease-out`,
             }}
           ></div>
           <div className="questionContainer">
