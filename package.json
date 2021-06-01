@@ -14,11 +14,11 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "components-quizapp-lib": "git+https://github.com/iSued/Accordion.git",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "skilla-components-library": "git+https://github.com/iSued/Accordion.git",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },

@@ -1,8 +1,9 @@
 import React from "react";
-
+import useCategoryHook from "../src/hooks/categoryHook";
+import useMenu from "../src/hooks/useMenu";
 import "./App.css";
 import Drawer from "./components/Drawer/Index";
-import { Accordion } from "skilla-components-library/lib/index";
+import { Accordion } from "components-quizapp-lib";
 import Quiz from "./pages/QuizPage/index";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -29,74 +30,23 @@ library.add(
   faHome
 );
 
-const useCategoryHook = () => {
-  const [data, setData] = React.useState({
-    cat1: {
-      catId: "cat1",
-      title: "Titolo1",
-      description: "Descrizione 1",
-      selected: false,
-      mandatory: false,
-      selectable: false,
-      completed: true,
-      assigned: false,
-    },
-    cat2: {
-      catId: "cat2",
-      title: "Titolo2",
-      description: "Descrizione 2",
-      selected: false,
-      mandatory: false,
-      selectable: false,
-      completed: true,
-      assigned: false,
-    },
-    cat3: {
-      catId: "cat3",
-      title: "Titolo3",
-      description: "Descrizione 3",
-      selected: false,
-      mandatory: false,
-      selectable: false,
-      completed: true,
-      assigned: false,
-    },
-    cat4: {
-      catId: "cat4",
-      title: "Titolo4",
-      description: "Descrizione 4",
-      selected: false,
-      mandatory: false,
-      selectable: false,
-      completed: true,
-      assigned: false,
-    },
-  });
+const useDrawer = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  const toggleCategory = (catId: string) => {
-    let newData: any = { ...data };
-    newData[catId].selected = !newData[catId].selected;
-    setData({ ...newData });
+  return {
+    isOpen,
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
   };
-
-  return { data: new Map(Object.entries(data)), toggleCategory };
 };
-// const useDrawer = () => {
-//   const [isOpen, setIsOpen] = React.useState(false);
-
-//   return {
-//     isOpen,
-//     open: () => setIsOpen(true),
-//     close: () => setIsOpen(false),
-//   };
-// };
 
 function App() {
-  // const { isOpen, open, close } = useDrawer();
-  const { data, toggleCategory } = useCategoryHook();
+  const { isOpen, open, close } = useDrawer();
+  //const { data, toggleCategory } = useCategoryHook();
   return (
     <div>
-      <Accordion data={data} toggleCategory={toggleCategory} />
+      <button onClick={() => open()}>Bottone</button>
+      <Drawer useMenu={useMenu()} toggled={isOpen} close={close} open={open} />
     </div>
   );
 }

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useMenu from "./useMenu";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const useStyles = makeStyles({
@@ -39,12 +38,38 @@ const useStyles = makeStyles({
   title: {},
 });
 
+type MenuData = {
+  drawer: {
+    main: MenuItem[];
+    bottom: MenuItem[];
+  };
+  footer?: MenuItem[];
+};
+
+type MenuItem = {
+  order: number;
+  label: string;
+  to: string;
+  icon?: string;
+  options?: MenuItemOptionGeneric | MenuItemOptionCategory;
+  enabledGroups?: string[];
+};
+
+type MenuItemOptionGeneric = {
+  key: string[];
+};
+
+type MenuItemOptionCategory = {
+  smartLibraryId?: string;
+  categoryId?: string;
+};
 const SwipeableDrawer: React.FC<{
+  useMenu: MenuData;
   toggled: boolean;
   open: () => void;
   close: () => void;
-}> = ({ toggled, open, close }) => {
-  const menu = useMenu();
+}> = ({ toggled, open, close, useMenu }) => {
+  const menu = useMenu;
 
   const classes = useStyles();
 
@@ -65,7 +90,7 @@ const SwipeableDrawer: React.FC<{
             <h1>Title</h1>
           </div>
           <div className={classes.main}>
-            {menu.drawer.main.map((el) => {
+            {menu.drawer.main.map((el: MenuItem) => {
               return (
                 <div
                   className={classes.menuItem}
@@ -84,7 +109,7 @@ const SwipeableDrawer: React.FC<{
             })}
           </div>
           <div className={classes.bottom}>
-            {menu.drawer.bottom.map((el) => {
+            {menu.drawer.bottom.map((el: MenuItem) => {
               return (
                 <div
                   className={classes.menuItem}
