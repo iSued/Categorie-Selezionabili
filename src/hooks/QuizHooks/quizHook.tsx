@@ -5,8 +5,8 @@ type QuizData = {
   points: number; // I punti che si guadagnano quando si fa un quiz
   goal: number; // Il numero minimo di risposte corrette per considerare il quiz corretto
   result: {
-    idDomanda: string;
-    answerIndex: number;
+    questionId: string;
+    answerIndex: number | null;
     correct: boolean;
   }[];
   showFeedbacks: boolean;
@@ -51,7 +51,13 @@ const useQuiz = (quizData: QuizData) => {
     return totalScore >= goal;
   }, [quizState]);
 
-  const registerResults = (results: any[]) => {
+  const registerResults = (
+    results: {
+      questionId: string;
+      answerIndex: number | null;
+      correct: boolean;
+    }[] = []
+  ) => {
     // registra su DB
     console.log(results);
     setQuizState({ ...quizState, result: results });

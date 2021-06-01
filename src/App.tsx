@@ -1,10 +1,12 @@
 import React from "react";
-import useCategoryHook from "../src/hooks/categoryHook";
-import useMenu from "../src/hooks/useMenu";
+import useCategoryHook from "./hooks/AccordionHooks/categoryHook";
+import useMenu from "./hooks/DrawerHooks/useMenu";
+import useDrawer from "./hooks/DrawerHooks/useDrawer";
+import quizHook from "./hooks/QuizHooks/quizHook";
+import fakeData from "./hooks/QuizHooks/fakeData";
 import "./App.css";
-import Drawer from "./components/Drawer/Index";
-import { Accordion } from "components-quizapp-lib";
-import Quiz from "./pages/QuizPage/index";
+import { Accordion, Drawer, Quiz } from "components-quizapp-lib";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faFont,
@@ -30,23 +32,13 @@ library.add(
   faHome
 );
 
-const useDrawer = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  return {
-    isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
-  };
-};
-
 function App() {
   const { isOpen, open, close } = useDrawer();
   //const { data, toggleCategory } = useCategoryHook();
   return (
     <div>
-      <button onClick={() => open()}>Bottone</button>
-      <Drawer useMenu={useMenu()} toggled={isOpen} close={close} open={open} />
+      {/* <Drawer useMenu={useMenu()} toggled={isOpen} close={close} open={open} /> */}
+      <Quiz Data={fakeData} useQuiz={quizHook} />
     </div>
   );
 }

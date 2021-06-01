@@ -1,11 +1,54 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./index.css";
-import Feedback from "../../components/FeedBack/index";
-import useQuiz from "./quizHook";
-import fakeData from "./fakeData";
+import Feedback from "./FeedBack/index";
 
-const QuizPage = () => {
-  const { quizState, registerResults, isCompleted } = useQuiz(fakeData);
+type QuizData = {
+  quiId: string; // id del quiz
+  points: number; // I punti che si guadagnano quando si fa un quiz
+  goal: number; // Il numero minimo di risposte corrette per considerare il quiz corretto
+  result: {
+    questionId: string;
+    answerIndex: number | null;
+    correct: boolean;
+  }[];
+  showFeedbacks: boolean;
+  feedbacks: {
+    wrong: string;
+    correct: string; // String che appare n schermata feedback quiz se superato
+  };
+  questions: {
+    id: string; //
+    index: number;
+    question: string;
+    timeAmount: number;
+    default_feedback: {
+      wrong: string;
+      correct: string;
+    };
+    answers: {
+      index: number;
+      text: string;
+      correct: boolean;
+      feedback?: string;
+    }[];
+  }[];
+};
+
+const QuizPage: React.FC<{
+  Data: QuizData;
+  useQuiz: (quizData: QuizData) => {
+    quizState: QuizData;
+    isCompleted: boolean | null;
+    registerResults: (
+      results?: {
+        questionId: string;
+        answerIndex: number | null;
+        correct: boolean;
+      }[]
+    ) => void;
+  };
+}> = ({ Data, useQuiz }) => {
+  const { quizState, registerResults, isCompleted } = useQuiz(Data);
   const [timer, setTimer] = useState({
     class: "timer",
     time: 0,
@@ -13,12 +56,12 @@ const QuizPage = () => {
   const [actualQuestion, setActualQuestion] = useState(0);
   const [defaultFeedback, setDefaultFeedback] = useState("");
   const [customFeedback, setCustomFeedback] = useState("");
-  const [outOfTime, setOutOfTime] = useState<boolean | null>(false);
-  interface Result {
+
+  type Result = {
     questionId: string;
     answerIndex: number | null;
     correct: boolean;
-  }
+  };
   const resultsArray: Result[] = [];
   const results = useRef(resultsArray);
 
@@ -76,7 +119,7 @@ const QuizPage = () => {
                     className="option"
                     onClick={() => {
                       handleTimer(false, 0);
-                      setOutOfTime(false);
+
                       results.current.push({
                         questionId: quizState.questions[actualQuestion].id,
                         answerIndex: el.index,
@@ -108,7 +151,6 @@ const QuizPage = () => {
                             setCustomFeedback("");
                           }, 2000);
                         else {
-                          setOutOfTime(null);
                           setTimeout(() => {
                             setDefaultFeedback("");
                             setCustomFeedback("");
