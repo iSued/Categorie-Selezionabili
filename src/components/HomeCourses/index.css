@@ -1,0 +1,68 @@
+.menu {
+  display: flex;
+  justify-content: center;
+}
+.menuItem {
+  text-align: center;
+  width: 25%;
+  display: inline;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  border-bottom: 5px solid #e0e0e0;
+  color: #e0e0e0;
+}
+.menuItem.selected {
+  color: blue;
+  border-bottom: 5px solid blue;
+}
+
+.courseCard {
+  box-shadow: rgba(119, 118, 118, 0.35) 0px 5px 15px;
+  margin: auto;
+  width: 40%;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+.cardImageContainer {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.cardImage {
+  border-radius: inherit;
+  width: 100%;
+}
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+.cardHeaderCategory {
+  font-weight: bold;
+}
+.cardHeaderTime {
+  font-size: 0.9rem;
+}
+.courseTime {
+  margin-left: 10px;
+}
+.cardTitle {
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 0 1rem;
+}
+.cardActions {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  padding-bottom: 7px;
+}
+.saveCourse {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.likeCourse {
+  cursor: pointer;
+}

@@ -6,7 +6,7 @@ import quizHook from "./hooks/QuizHooks/quizHook";
 import fakeData from "./hooks/QuizHooks/fakeData";
 import "./App.css";
 import { Accordion, Drawer, Quiz } from "components-quizapp-lib";
-
+import Home from "./components/HomeCourses/index";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faFont,
@@ -31,14 +31,46 @@ library.add(
   faInfoCircle,
   faHome
 );
-
+type CourseCard = {
+  title: string;
+  author: string;
+  thumbnail: string;
+  isLiked: boolean;
+  isRead: boolean;
+  isBookmarked: boolean;
+  timeToRead: number;
+  categories: string[];
+  toggleLike: () => boolean;
+  toggleBookmarked: () => boolean;
+};
+const fakedata: CourseCard = {
+  title: "Che cos'è sharepoint online?",
+  author: "OFFICE 365",
+  thumbnail: "https://via.placeholder.com/468x60",
+  isLiked: true,
+  isRead: false,
+  isBookmarked: true,
+  timeToRead: 2,
+  categories: [
+    "TUTTI",
+    "DIGITAL FOR LEADER",
+    "OFFICE 365",
+    "TECNOLOGIE DIGITALI",
+  ],
+  toggleLike: () => {
+    return true;
+  },
+  toggleBookmarked: () => {
+    return false;
+  },
+};
 function App() {
-  const { isOpen, open, close } = useDrawer();
+  //const { isOpen, open, close } = useDrawer();
   //const { data, toggleCategory } = useCategoryHook();
   return (
     <div>
       {/* <Drawer useMenu={useMenu()} toggled={isOpen} close={close} open={open} /> */}
-      <Quiz Data={fakeData} useQuiz={quizHook} />
+      <Home card={fakedata} />
     </div>
   );
 }
